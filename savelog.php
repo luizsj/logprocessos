@@ -30,7 +30,18 @@ function savelog(){
     if (savelog_valid_machine($dados['machine_id'], $dados['machine_pass'])) {
         $process_id_princ = bd_aux_process_get_id($dados['process_pai']);
         $process_id_filho = bd_aux_process_get_id($dados['$process_filho']);
-        
+        $instr = "insert into executions (tipo, machine_id, process_id_princ, process_id_sub, dhini, dhfim)
+                        values (? , ? , ? , ? , ?, ?)";
+        $params[0] = $dados['tipo'];
+        $params[1] = $dados['machine_id'];
+        $params[2] = $process_id_princ;
+        $params[3] = $process_id_filho;
+        $params[4] = $dados['dhinicio'];
+        $params[5] = $dados['dhfim'];
+        $sql = bd_query_execute($instr, $params);
+        if (!$sql) {
+            exit;
+        }
     }
 }
 

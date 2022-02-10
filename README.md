@@ -67,7 +67,8 @@ Meio: API que recebe os dados e faz a gravação em banco local
                 ['dhinicio'] = 'YYYY-MM-DD HH:II:SS.msms'
                 ['dhfim] = 'YYYY-MM-DD HH:II:SS.msms'                
     primeiro valida o machine id/pass
-    depois verifica a existência ou cadastra os dois proces
+    depois verifica a existência ou cadastra os dois processos
     depois salva os dados na tabela de executions
+    
     
         
