@@ -50,11 +50,24 @@ Meio: API que recebe os dados e faz a gravação em banco local
             e isso irá consumir tempo do próprio processo 
             para processar a chamada inicial
     Table Machines
-        id 
-        name
-        password
-    TAble tipo desnecessário, porque será apenas cron ou web
+        id ,         name,         password
+    Table tipo desnecessário, porque será apenas cron ou web
     Table Process
-        id 
-        name
+        id ,         name
+
+# 3.3 ) Execução
+    O endpoint será o savelog.php
+    chamada será http://qualquercoisa/savelog.php?fn=savelog
+                e os dados virão por post
+            dados será um array simples
+                ['machine_id'] = integer
+                ['machine_pass'] = 'texto'
+                ['process_pai'] = 'texto'
+                ['process_filho] = 'texto'
+                ['dhinicio'] = 'YYYY-MM-DD HH:II:SS.msms'
+                ['dhfim] = 'YYYY-MM-DD HH:II:SS.msms'                
+    primeiro valida o machine id/pass
+    depois verifica a existência ou cadastra os dois proces
+    depois salva os dados na tabela de executions
+    
         

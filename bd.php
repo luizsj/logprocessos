@@ -33,6 +33,7 @@ if (!file_exists('bd_params.php')) {
     exit;
 }
 include('bd_params.php'); //define o array bd_params com os parâmetros de conexão
+include('bd/bd_aux.php');
 
 global $conn;
 $conn = new mysqli($bd_params['host'], $bd_params['user'], $bd_params['password'], $bd_params['database']);
