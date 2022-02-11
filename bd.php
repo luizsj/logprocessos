@@ -38,6 +38,9 @@ include('bd/bd_aux.php');
 global $conn;
 $conn = new mysqli($bd_params['host'], $bd_params['user'], $bd_params['password'], $bd_params['database']);
 
+global $lf;
+$lf = chr(13).chr(10);
+
 function bd_query_select_unique_value($instr, $params){
     global $conn;
     $instr = bd_query_instr_params($instr, $params);

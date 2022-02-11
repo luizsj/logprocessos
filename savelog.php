@@ -2,23 +2,28 @@
 //endpoint para chamadas de API
 //recebe um json e salva os dados no banco
 //checando antes o usuário e senha da máquina
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
 include('bd.php');
 
-if (!isset($_GET['fn'])) {
-    echo("<p>Chamada inválida");
-} else {
-    $function_to_call = $_GET['fn'];
+
+    $function_to_call = 'savelog';
+    echo('chamar função '.$function_to_call.$lf);
     if (function_exists($function_to_call)) {
         $result = $function_to_call();
     } else {
         echo("<p>Chamada inválida");
     }
-}
+
 
 function savelog(){
-    $dados = $_POST['dados_json'];
-    $dados = json_decode($dados, true);
+    global $lf;
+    $json = file_get_contents('php://input');
+    $dados = json_decode($json, true);
+
+    print_r($dados);
+    
 /*  $dados é uma array
         ['machine_id'] = integer
         ['machine_pass'] = 'texto'
@@ -29,7 +34,7 @@ function savelog(){
         */
     if (savelog_valid_machine($dados['machine_id'], $dados['machine_pass'])) {
         $process_id_princ = bd_aux_process_get_id($dados['process_pai']);
-        $process_id_filho = bd_aux_process_get_id($dados['$process_filho']);
+        $process_id_filho = bd_aux_process_get_id($dados['process_filho']);
         $instr = "insert into executions (tipo, machine_id, process_id_princ, process_id_sub, dhini, dhfim)
                         values (? , ? , ? , ? , ?, ?)";
         $params[0] = $dados['tipo'];
